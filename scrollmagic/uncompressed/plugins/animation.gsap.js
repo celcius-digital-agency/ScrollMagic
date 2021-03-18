@@ -32,8 +32,14 @@
 	} else if (typeof exports === 'object') {
 		// CommonJS
 		// Loads whole gsap package onto global scope.
-		var gsap = require("gsap/dist/gsap") || require("gsap");
+		var gsap;
 
+		try {
+			gsap = require("gsap/dist/gsap");
+		} catch(error) {
+			gsap = require("gsap")
+		}
+		
 		// TweenMax/TimelineMax will be global in v2. In v3, they will be on the gsap object
 		factory(require('scrollmagic'), gsap, TweenMax || gsap, TimelineMax || gsap);
 	} else {
